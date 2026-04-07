@@ -1,0 +1,120 @@
+Timestamp,Detected Text,Classification
+2026-03-11 16:43:16,are you happy,Safe
+2026-03-11 16:43:25,how are you,Safe
+2026-03-11 16:43:39,you are so stupid,Harmful
+2026-03-11 16:43:47,you can do it,Safe
+2026-03-11 16:43:54,i am so happy for you,Safe
+2026-03-11 16:44:02,idiot,Safe
+2026-03-11 16:44:13,shut up,Safe
+16:51:31,you are not a human,SAFE
+16:51:39,are you stup,SAFE
+16:51:45,get out,SAFE
+16:51:52,shut up,HARMFUL
+16:52:01,stupid,HARMFUL
+16:52:09,you can't do,SAFE
+16:52:17,you are not capa,SAFE
+16:52:24,you are not capable,SAFE
+16:52:30,you are,SAFE
+16:52:38,you are a,SAFE
+16:52:49,you are a loser,HARMFUL
+16:53:06,get out get out,SAFE
+16:53:24,you are not capable of,SAFE
+16:53:33,you you,SAFE
+16:53:42,you are not capable of anything,SAFE
+16:53:51,idiot,HARMFUL
+16:53:57,rascal,SAFE
+16:54:13,dum dum,SAFE
+16:54:24,are you dumb,HARMFUL
+17:03:37,are you mad,SAFE
+20:01:04,anger,SAFE
+20:01:11,hello,SAFE
+20:01:16,are you mad,SAFE
+20:01:28,are you ins,SAFE
+20:01:42,are you insane,SAFE
+20:01:51,are you stupid,HARMFUL
+20:02:05,are you an idiot are you an idiot,HARMFUL
+20:02:17,you are so,SAFE
+20:02:23,you are so dum,SAFE
+20:02:36,you do not have any capa,SAFE
+20:02:42,you do not have a,SAFE
+20:02:50,i hate you,HARMFUL
+20:03:04,excuse me neeku telugu,SAFE
+20:04:13,you,SAFE
+20:04:18,you,SAFE
+20:04:22,you are so,SAFE
+20:05:10,you are,SAFE
+20:05:18,are you an,SAFE
+20:05:25,are you an idiot,HARMFUL
+20:05:42,are,SAFE
+20:05:49,panchatantra,SAFE
+20:05:55,are you stupid,HARMFUL
+20:06:13,are you an idiot,HARMFUL
+20:06:17,stupid,HARMFUL
+20:06:22,i hate you,HARMFUL
+20:06:28,you can do it,SAFE
+20:06:33,you are capable,SAFE
+20:13:05,you are so stupid you cannot,HARMFUL
+20:13:13,you can,SAFE
+20:13:19,you can do,SAFE
+20:13:39,you are,SAFE
+20:13:45,you are stupid,HARMFUL
+20:13:53,stupid,HARMFUL
+20:17:07,are you stupid,HARMFUL
+20:17:36,are you,SAFE
+20:17:44,you can do it you are,SAFE
+20:18:01,are you stupid you are not capable,HARMFUL
+20:18:19,you can do it to a capable,SAFE
+20:18:25,you are not capable,SAFE
+20:19:12,you can do it you a cake you can do it you are capable,SAFE
+20:19:19,you are not capable,SAFE
+09:34:05,you are a disgrace,HARMFUL
+09:34:17,i hate you,HARMFUL
+09:34:24,you can do,SAFE
+09:34:35,you are amazing,SAFE
+09:34:51,you are stupid,HARMFUL
+09:35:03,this situation is fucked up,HARMFUL
+09:35:12,what sentences on the,SAFE
+09:35:30,you are a waste fellow typical indian,SAFE
+09:35:47,you are good for nothing,SAFE
+09:36:35,eminem bad things chapati price of which,HARMFUL
+09:36:46,chapati price of which eminem match,SAFE
+09:36:54,you,SAFE
+09:37:01,you are,SAFE
+09:37:20,bitch,HARMFUL
+09:37:39,it's better to add the courses on the screen karna,SAFE
+09:37:51,good for nothing,SAFE
+09:38:02,turn off again,SAFE
+09:38:17,piece of shit,HARMFUL
+09:46:54,you are stupid,HARMFUL
+09:47:00,you can do it,SAFE
+09:47:11,you are a disgrace,HARMFUL
+09:47:29,shut up,HARMFUL
+09:47:36,you are fit for not,SAFE
+09:47:53,are you an idiot,HARMFUL
+10:10:33,thank you for coming,SAFE
+10:10:43,you are most welcome,SAFE
+10:10:52,you son of a bitch,HARMFUL
+10:11:04,chalan,SAFE
+10:11:53,import and kava,SAFE
+10:13:14,the execution ela,SAFE
+10:13:40,atharvashirsha marathi sentences bachpan,SAFE
+10:15:07,pooja assignment,HARMFUL
+10:15:16,detective agency,SAFE
+10:31:17,i,SAFE
+10:31:36,detection,SAFE
+10:32:18,you can do with me project project,SAFE
+10:32:29,you are a disgrace,HARMFUL
+10:32:50,you are,SAFE
+10:33:23,are you stupid,HARMFUL
+10:34:02,apple,SAFE
+19:50:24,are you an,SAFE
+19:50:30,are you an,SAFE
+19:50:36,are you an,SAFE
+19:50:44,are you stupid,HARMFUL
+19:50:54,you can do it,SAFE
+19:51:06,you are fit for nothing,HARMFUL
+19:51:22,sabse sundar nagar hospital,SAFE
+19:51:49,meethi chal ja,SAFE
+19:52:00,bad,HARMFUL
+19:52:05,you are,SAFE
+19:52:13,you are useless,HARMFUL
