@@ -1,0 +1,206 @@
+# 🛡️ Unethical Speech Detection System
+
+A real-time, AI-powered speech monitoring system that identifies potentially harmful speech using speech recognition, TF-IDF feature extraction, and a Support Vector Machine (SVM) classifier. The system combines machine learning predictions with priority keyword detection, generates an audible alert when harmful speech is detected, and records incidents for review.
+
+## 📌 Overview
+
+Unethical or harmful language can contribute to hostile and unsafe environments. This project explores automated speech monitoring to identify potentially harmful language as it is spoken.
+
+The system continuously listens through a microphone, converts speech into text using Google Speech Recognition, and analyzes the transcript using a hybrid detection approach:
+
+- **Rule-based detection:** Checks for predefined priority harmful words and phrases.
+- **Machine learning detection:** Uses a trained Linear Support Vector Classifier with TF-IDF text features.
+- **Incident logging:** Records the transcript, timestamp, and classification in a CSV file.
+- **Audio alerts:** Plays a beep when potentially harmful speech is detected.
+
+## ✨ Key Features
+
+- **Real-Time Speech Monitoring:** Continuously listens for spoken input through a microphone.
+- **Speech-to-Text Conversion:** Uses the Google Speech Recognition service to transcribe captured audio.
+- **Hybrid Detection:** Combines predefined keyword matching with an SVM-based text classification model.
+- **Contextual Text Features:** Uses unigram and bigram TF-IDF features to represent text.
+- **Audible Alerts:** Triggers a 1000 Hz beep lasting 600 milliseconds when harmful speech is detected.
+- **Incident Logging:** Stores the time, recognized transcript, and classification in `incident_logs.csv`.
+- **Noise Calibration:** Adjusts to ambient noise before starting speech recognition.
+
+## 🧠 Technology Stack
+
+| Component | Technology |
+|---|---|
+| Programming language | Python |
+| Speech recognition | SpeechRecognition |
+| Speech transcription | Google Speech Recognition |
+| Text feature extraction | Scikit-learn TF-IDF Vectorizer |
+| Classification algorithm | Linear Support Vector Classifier (LinearSVC) |
+| Data processing | Pandas |
+| Model serialization | Pickle |
+| Incident logging | CSV |
+| Audio alerts | Windows `winsound` |
+
+## ⚙️ How It Works
+
+```text
+Microphone Input
+       |
+       v
+Ambient Noise Calibration
+       |
+       v
+Speech Capture
+       |
+       v
+Google Speech Recognition
+       |
+       v
+Transcribed Text
+       |
+       +----------------------+
+       |                      |
+       v                      v
+Priority Keyword Check   TF-IDF Vectorization
+                              |
+                              v
+                         Linear SVM Model
+       |                      |
+       +----------+-----------+
+                  |
+                  v
+          Detection Decision
+             /         \
+            v           v
+     Harmful Speech   Safe Speech
+            |           |
+            v           v
+       Sound Alert   Console Status
+            |           |
+            +-----+-----+
+                  |
+                  v
+         Incident CSV Logging
+```
+
+The system classifies a transcript as harmful if the SVM predicts the harmful class or if a predefined priority keyword is detected. Otherwise, the transcript is classified as safe.
+
+## 🏋️ Model Training
+
+The training script, `train_model.py`, downloads the labeled hate speech and offensive language dataset from the [Davidson et al. dataset repository](https://github.com/t-davidson/hate-speech-and-offensive-language).
+
+### Training pipeline
+
+1. Loads the labeled dataset using Pandas.
+2. Maps the original labels into two categories:
+   - `0` and `1` become the harmful category (`1`).
+   - `2` becomes the safe category (`0`).
+3. Balances the two categories by sampling up to 10,000 examples from each category, using a fixed random seed.
+4. Extracts text features with `TfidfVectorizer`, configured for unigrams and bigrams, English stop-word removal, and a maximum of 5,000 features.
+5. Trains a `LinearSVC` classifier with `C=1.0` and balanced class weights.
+6. Saves the trained model and fitted vectorizer as pickle files.
+
+### Model artifacts
+
+- `svm_model_final.pkl` — trained Linear SVM classifier.
+- `tfidf_final.pkl` — fitted TF-IDF vectorizer used to transform text before classification.
+
+The training script reports accuracy on the same balanced dataset used for training. This is training accuracy, not an independent test-set evaluation.
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Windows operating system, because the implementation uses `winsound`.
+- Python 3.
+- A working microphone.
+- An active internet connection for Google Speech Recognition and dataset retrieval during training.
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/Harini-adusumalli/unethical-speech-detection.git
+cd unethical-speech-detection
+```
+
+### 2. Install the dependencies
+
+```bash
+pip install pandas scikit-learn SpeechRecognition PyAudio
+```
+
+`PyAudio` provides microphone access for the speech recognition library. If its installation fails, use a compatible wheel or install method for your Python and Windows versions.
+
+### 3. Run the system
+
+The repository includes the trained model and vectorizer files required by `main.py`. To start monitoring:
+
+```bash
+python main.py
+```
+
+The program loads the saved model and vectorizer, calibrates the microphone, and begins continuous speech monitoring.
+
+### 4. Retrain the model (optional)
+
+To train the classifier again using the dataset configured in `train_model.py`, run:
+
+```bash
+python train_model.py
+```
+
+This generates or replaces `svm_model_final.pkl` and `tfidf_final.pkl` in the current directory.
+
+After training completes, start the monitoring system using `python main.py`.
+
+## 📁 Project Structure
+
+```text
+unethical-speech-detection/
+│
+├── main.py                # Speech monitoring and harmful speech detection
+├── train_model.py         # Dataset preparation and SVM model training
+├── incident_logs.csv      # Recorded speech detection incidents
+├── svm_model_final.pkl    # Trained SVM classifier
+├── tfidf_final.pkl        # Fitted TF-IDF vectorizer
+├── svm_model.pkl          # Additional saved SVM model
+├── svm_model_big.pkl      # Additional saved SVM model
+└── tfidf_vectorizer.pkl   # Additional saved TF-IDF vectorizer
+```
+
+The monitoring script loads `svm_model_final.pkl` and `tfidf_final.pkl`. The other serialized model and vectorizer files are present in the repository but are not loaded by the current `main.py` implementation.
+
+## 📝 Incident Logging
+
+Detected speech is recorded in `incident_logs.csv` with the following columns:
+
+| Column | Description |
+|---|---|
+| `Time` | Time of the recorded incident in `HH:MM:SS` format |
+| `Transcript` | Text recognized from the audio |
+| `Category` | `HARMFUL` or `SAFE` |
+
+The CSV file is created when the first incident is logged, if it does not already exist. Subsequent detections are appended to the file.
+
+## ⚠️ Limitations
+
+- **Internet dependency:** Google Speech Recognition requires network connectivity and may fail when the service is unavailable.
+- **Language support:** The classifier is trained on an English-language dataset and is not designed to reliably detect harmful speech in every language.
+- **Context sensitivity:** Keyword matching and text classification can misinterpret sarcasm, quotations, jokes, and context-dependent language.
+- **False positives and negatives:** A prediction is not a definitive judgment that a speaker's intent was harmful or safe.
+- **Platform dependency:** The audio alert uses Windows-specific functionality.
+- **Privacy considerations:** Speech is sent to an external recognition service for transcription. Users should be informed and appropriate consent obtained before monitoring conversations.
+- **Evaluation limitations:** The training script does not implement a separate held-out test set or report independent evaluation metrics.
+
+## 🔮 Future Enhancements
+
+- Add a dedicated train, validation, and test split for more reliable model evaluation.
+- Evaluate precision, recall, F1-score, and the confusion matrix on unseen data.
+- Improve detection of contextual, indirect, and multilingual harmful speech.
+- Add a dashboard to review and filter recorded incidents.
+- Introduce configurable alert thresholds and priority categories.
+- Explore offline speech recognition to reduce dependence on external services.
+
+
+
+[GitHub Profile](https://github.com/Harini-adusumalli)
+
+## 📄 License
+
+No license file is currently listed in the repository. Reuse and redistribution permissions have therefore not been specified.
